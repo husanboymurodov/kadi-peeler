@@ -1,0 +1,22 @@
+{
+  "name": "kadi-peeler",
+  "version": "1.0.0",
+  "description": "KadiPeel 360 - Butternut squash (Kadi) interactive peeling simulator and invented device concept",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "kadi",
+    "butternut-squash",
+    "peeler",
+    "canvas",
+    "gcp",
+    "cloud-run"
+  ],
+  "author": "Husan Boymurodov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
