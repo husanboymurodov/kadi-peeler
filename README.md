@@ -44,6 +44,10 @@
 
 ## 🚀 4. Ишга тушириш ва GCP Cloud Run га юклаш
 
+### 🌐 Jonli Havola (Live Demo):
+- **Cloud Run URL:** [https://kadi-peeler-745483922277.asia-southeast1.run.app](https://kadi-peeler-745483922277.asia-southeast1.run.app)
+- **GitHub Repository:** [https://github.com/husanboymurodov/kadi-peeler](https://github.com/husanboymurodov/kadi-peeler)
+
 ### Маҳаллий ишга тушириш:
 ```bash
 npm install
