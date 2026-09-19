@@ -1,12 +1,13 @@
 /**
- * KadiArch - Interaktiv Kadi Archish Moslamasi va Veb-Trenajyor
+ * KadiArch - Ozg'in Qovoq (Kadi) Archish Moslamasi
+ * Chiroyli va tabiiy kadi qiyofasi hamda qulay archish simulyatori
  * Muallif: Husan Boymurodov
  */
 
 (function () {
   'use strict';
 
-  // --- Ovoz Sintezi (Web Audio API) ---
+  // --- Ovoz Mexanizmi (Web Audio API) ---
   class SoundEngine {
     constructor() {
       this.ctx = null;
@@ -46,13 +47,14 @@
         const noise = this.ctx.createBufferSource();
         noise.buffer = buffer;
 
+        // Mayin pichoq shitirlashi uchun filtr
         const filter = this.ctx.createBiquadFilter();
         filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(2800 + Math.min(speed * 12, 1100), now);
+        filter.frequency.setValueAtTime(2700 + Math.min(speed * 12, 1100), now);
         filter.Q.setValueAtTime(3.2, now);
 
         const gain = this.ctx.createGain();
-        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.setValueAtTime(0.08, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
 
         noise.connect(filter);
@@ -71,7 +73,7 @@
       if (!this.ctx) return;
 
       const now = this.ctx.currentTime;
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+      const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, idx) => {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -98,13 +100,13 @@
     }
 
     emit(x, y, vx, vy) {
-      if (this.particles.length > 75) return;
-      const length = 20 + Math.random() * 24;
+      if (this.particles.length > 70) return;
+      const length = 22 + Math.random() * 26;
       const width = 6 + Math.random() * 5;
       this.particles.push({
         x: x,
         y: y,
-        vx: vx + (Math.random() - 0.5) * 4.5,
+        vx: vx + (Math.random() - 0.5) * 4.2,
         vy: vy + Math.random() * 2.5 + 1.8,
         length: length,
         width: width,
@@ -124,8 +126,8 @@
         const p = this.particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.28; // Gravitatsiya
-        p.vx *= 0.97; // Havo qarshiligi
+        p.vy += 0.28;
+        p.vx *= 0.97;
         p.angle += p.vAngle;
         p.alpha -= 0.016;
 
@@ -139,7 +141,7 @@
         this.ctx.rotate(p.angle);
         this.ctx.globalAlpha = p.alpha;
 
-        // Spiral o'ralgan tasma
+        // Spiral bukilgan po'stloq tasmasi
         this.ctx.beginPath();
         this.ctx.moveTo(-p.width / 2, 0);
         this.ctx.quadraticCurveTo(0, p.length * p.curl, p.width / 2, p.length);
@@ -148,7 +150,7 @@
         this.ctx.lineCap = 'round';
         this.ctx.stroke();
 
-        // Ichki qizil-sariq eti
+        // Qirqilgan ichki qizil-sariq qismi
         this.ctx.beginPath();
         this.ctx.moveTo(0, 0);
         this.ctx.lineTo(0, p.length * 0.85);
@@ -161,10 +163,10 @@
     }
   }
 
-  // --- Asosiy Simulyator ---
+  // --- Asosiy KadiArch Simulyatori ---
   class KadiArchSimulator {
     constructor() {
-      // DOM Elementlar
+      // Elementlar
       this.wrapper = document.getElementById('canvasWrapper');
       this.canvas = document.getElementById('peelCanvas');
       this.ctx = this.canvas.getContext('2d');
@@ -185,7 +187,7 @@
       this.celebrationModal = document.getElementById('celebrationModal');
       this.peelAgainBtn = document.getElementById('peelAgainBtn');
 
-      // Doimiy yagona pichoq o'lchami (optimal 22px)
+      // Optimal yagona pichoq o'lchami
       this.peelRadius = 22;
       this.isDragging = false;
       this.lastPos = null;
@@ -195,7 +197,7 @@
       this.hasInteracted = false;
       this.completed = false;
 
-      // Offscreen buferlar
+      // Offscreen chizish buferlari
       this.fleshCanvas = document.createElement('canvas');
       this.fleshCtx = this.fleshCanvas.getContext('2d');
 
@@ -204,18 +206,20 @@
 
       this.ribbonSystem = new RibbonParticleSystem(this.ribbonCanvas);
 
-      // Kadi kontur nuqtalari (Catmull-Rom spline nazorati)
+      // Kadi shakli uchun tabiiy va nafis Catmull-Rom nazorat nuqtalari
+      // Haqiqiy o'zbek kadisi: uzun, muloyim ozg'in bo'yin va to'liq yumaloq qorin
       this.controlPoints = [
-        { t: 0.00, r: 24 }, // Dum ulanish qismi
-        { t: 0.05, r: 35 }, // Yuqori bo'yin kengayishi
-        { t: 0.16, r: 36 }, // Mayin va ozg'in bo'yin
-        { t: 0.30, r: 37 }, // Bo'yin o'rtasi
-        { t: 0.42, r: 42 }, // Bel qismi
-        { t: 0.55, r: 56 }, // Qorin boshlanishi
-        { t: 0.72, r: 86 }, // To'liq dumaloq qorin cho'qqisi
-        { t: 0.85, r: 84 }, // Qorin pasti
-        { t: 0.94, r: 62 }, // Tag silliq aylanishi
-        { t: 1.00, r: 14 }  // Tag asosi
+        { t: 0.00, r: 22 }, // Dum asosi
+        { t: 0.04, r: 34 }, // Bo'yin boshlanishi
+        { t: 0.15, r: 35 }, // Uzun ozg'in bo'yin
+        { t: 0.28, r: 36 }, // Bo'yin o'rtasi
+        { t: 0.40, r: 38 }, // Belga o'tish
+        { t: 0.52, r: 48 }, // Qorin boshlanishi
+        { t: 0.65, r: 76 }, // Qorin kengayishi
+        { t: 0.74, r: 88 }, // Qorinning eng to'liq qismi
+        { t: 0.86, r: 82 }, // Qorin pasti
+        { t: 0.94, r: 58 }, // Tag qismining dumaloqligi
+        { t: 1.00, r: 16 }  // Tag tugun o'rni
       ];
 
       this.init();
@@ -262,21 +266,29 @@
     }
 
     setupSquashGeometry() {
-      this.cx = this.width / 2;
-      this.topY = 44;
-      this.bottomY = this.height - 44;
+      this.baseCx = this.width / 2;
+      this.topY = 46;
+      this.bottomY = this.height - 46;
       this.squashHeight = this.bottomY - this.topY;
     }
 
     /**
-     * Catmull-Rom Spline orqali haqiqiy, silliq va chiroyli kadi konturi
+     * Kadi markaziy o'qining mayin tabiiy egilishi
+     */
+    getCenterAtY(y) {
+      const t = (y - this.topY) / this.squashHeight;
+      // Tabiiy qovoqlardagi nozik 3-4 piksellik mayin tiriklik egilishi
+      return this.baseCx + Math.sin(t * Math.PI) * 3.5;
+    }
+
+    /**
+     * Catmull-Rom Spline orqali kadi qovurg'asi radiusini hisoblash
      */
     getRadiusAtY(y) {
       if (y < this.topY || y > this.bottomY) return 0;
-      const t = (y - this.topY) / this.squashHeight; // 0 dan 1 gacha
+      const t = (y - this.topY) / this.squashHeight;
 
       const pts = this.controlPoints;
-      // Oraliqni aniqlash
       let i = 0;
       while (i < pts.length - 2 && pts[i + 1].t < t) {
         i++;
@@ -288,8 +300,6 @@
       const p3 = pts[Math.min(pts.length - 1, i + 2)];
 
       const segT = (t - p1.t) / (p2.t - p1.t);
-
-      // Catmull-Rom formulasi
       const t2 = segT * segT;
       const t3 = t2 * segT;
       const v0 = (p2.r - p0.r) * 0.5;
@@ -304,33 +314,45 @@
 
     isPointInsideSquash(x, y) {
       if (y < this.topY || y > this.bottomY) return false;
+      const cx = this.getCenterAtY(y);
       const r = this.getRadiusAtY(y);
-      return Math.abs(x - this.cx) <= r;
+      return Math.abs(x - cx) <= r;
     }
 
     drawSquashPath(ctx) {
       ctx.beginPath();
-      const steps = 70;
-      // O'ng tomon
+      const steps = 80;
+      // O'ng tomon konturi
       for (let i = 0; i <= steps; i++) {
         const y = this.topY + (i / steps) * this.squashHeight;
+        const cx = this.getCenterAtY(y);
         const r = this.getRadiusAtY(y);
-        const x = this.cx + r;
+        const x = cx + r;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
-      // Chap tomon
+      // Pastki dumaloq asosi
+      const bottomCx = this.getCenterAtY(this.bottomY);
+      ctx.quadraticCurveTo(bottomCx, this.bottomY + 8, bottomCx - 14, this.bottomY);
+
+      // Chap tomon konturi
       for (let i = steps; i >= 0; i--) {
         const y = this.topY + (i / steps) * this.squashHeight;
+        const cx = this.getCenterAtY(y);
         const r = this.getRadiusAtY(y);
-        const x = this.cx - r;
+        const x = cx - r;
         ctx.lineTo(x, y);
       }
+      // Yuqori bo'yin ulanishi
+      const topCx = this.getCenterAtY(this.topY);
+      ctx.quadraticCurveTo(topCx, this.topY - 4, topCx + 14, this.topY);
       ctx.closePath();
     }
 
     generateSquashLayers() {
-      // 1. Lahm (Go'sht) Qatlami - Mazali va sershira to'q sariq
+      // ==========================================
+      // 1. LAHM QATLAMI (Ichki shirin qovoq go'shti)
+      // ==========================================
       const fCtx = this.fleshCtx;
       fCtx.clearRect(0, 0, this.width, this.height);
 
@@ -338,48 +360,52 @@
       this.drawSquashPath(fCtx);
       fCtx.clip();
 
-      // Asosiy to'q sariq gradyent
-      const fleshGrad = fCtx.createLinearGradient(this.cx - 90, this.topY, this.cx + 90, this.bottomY);
-      fleshGrad.addColorStop(0, '#ff781f');
-      fleshGrad.addColorStop(0.35, '#fb923c');
-      fleshGrad.addColorStop(0.7, '#ea580c');
-      fleshGrad.addColorStop(1, '#c2410c');
+      // Boy va sershira tabiiy apelsin-sabzi tusidagi gradyent
+      const fleshGrad = fCtx.createRadialGradient(
+        this.baseCx - 35, this.topY + this.squashHeight * 0.45, 20,
+        this.baseCx, this.topY + this.squashHeight * 0.6, this.squashHeight * 0.65
+      );
+      fleshGrad.addColorStop(0, '#ff7d26');
+      fleshGrad.addColorStop(0.3, '#ff6a00');
+      fleshGrad.addColorStop(0.65, '#ea580c');
+      fleshGrad.addColorStop(1, '#b43b02');
       fCtx.fillStyle = fleshGrad;
       fCtx.fill();
 
-      // 3D Hajm nuri
-      const highlightGrad = fCtx.createLinearGradient(this.cx - 30, 0, this.cx + 50, 0);
-      highlightGrad.addColorStop(0, 'rgba(254, 215, 170, 0.45)');
-      highlightGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.2)');
-      highlightGrad.addColorStop(1, 'rgba(0, 0, 0, 0.28)');
-      fCtx.fillStyle = highlightGrad;
+      // Qovoq etining nozik tolalari va yaltirashi
+      fCtx.fillStyle = 'rgba(255, 237, 213, 0.18)';
+      fCtx.beginPath();
+      fCtx.ellipse(this.baseCx - 16, this.topY + this.squashHeight * 0.35, 18, 90, -0.05, 0, Math.PI * 2);
       fCtx.fill();
 
-      // Lahmdagi tabiiy mayin tolalari
-      fCtx.strokeStyle = 'rgba(194, 65, 12, 0.22)';
-      fCtx.lineWidth = 1.2;
-      for (let y = this.topY + 12; y < this.bottomY - 12; y += 7) {
+      // Lahmdagi tabiiy go'sht tolalari
+      fCtx.strokeStyle = 'rgba(180, 50, 5, 0.18)';
+      fCtx.lineWidth = 1.3;
+      for (let y = this.topY + 12; y < this.bottomY - 12; y += 6) {
+        const cx = this.getCenterAtY(y);
         const r = this.getRadiusAtY(y);
         fCtx.beginPath();
-        fCtx.moveTo(this.cx - r * 0.82, y);
-        fCtx.quadraticCurveTo(this.cx + (Math.random() - 0.5) * 16, y + 2, this.cx + r * 0.82, y);
+        fCtx.moveTo(cx - r * 0.82, y);
+        fCtx.quadraticCurveTo(cx + (Math.sin(y * 0.1) * 8), y + 1.5, cx + r * 0.82, y);
         fCtx.stroke();
       }
 
-      // Pastki qorindagi urug' uyasi soyasi
-      const cavityY = this.topY + this.squashHeight * 0.74;
-      const cavityGrad = fCtx.createRadialGradient(this.cx, cavityY, 8, this.cx, cavityY, 44);
+      // Pastdagi urug' xonasi soyasi
+      const cavityY = this.topY + this.squashHeight * 0.73;
+      const cavityGrad = fCtx.createRadialGradient(this.baseCx, cavityY, 8, this.baseCx, cavityY, 46);
       cavityGrad.addColorStop(0, 'rgba(254, 240, 138, 0.35)');
-      cavityGrad.addColorStop(0.6, 'rgba(234, 88, 12, 0.16)');
+      cavityGrad.addColorStop(0.55, 'rgba(234, 88, 12, 0.15)');
       cavityGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       fCtx.fillStyle = cavityGrad;
       fCtx.beginPath();
-      fCtx.ellipse(this.cx, cavityY, 34, 46, 0, 0, Math.PI * 2);
+      fCtx.ellipse(this.baseCx, cavityY, 34, 48, 0, 0, Math.PI * 2);
       fCtx.fill();
 
       fCtx.restore();
 
-      // 2. Po'stloq Qatlami - Chiroyli mumsimon sarg'ish kadi po'sti
+      // ==========================================
+      // 2. PO'STLOQ QATLAMI (Haqiqiy mumsimon kadi)
+      // ==========================================
       const sCtx = this.skinCtx;
       sCtx.clearRect(0, 0, this.width, this.height);
 
@@ -387,46 +413,111 @@
       this.drawSquashPath(sCtx);
       sCtx.clip();
 
-      // Tabiiy kadi po'stlog'i tuslari
-      const skinGrad = sCtx.createLinearGradient(this.cx - 90, 0, this.cx + 90, 0);
-      skinGrad.addColorStop(0, '#d97706');
-      skinGrad.addColorStop(0.22, '#f59e0b');
-      skinGrad.addColorStop(0.48, '#fde68a'); // Quyosh yaltirashi
-      skinGrad.addColorStop(0.8, '#f59e0b');
-      skinGrad.addColorStop(1, '#b45309');
+      // Asosiy tabiiy kadi rangi: sarg'ish-qaymoq, asal va pista rang tovlanishi
+      const skinGrad = sCtx.createLinearGradient(this.baseCx - 100, 0, this.baseCx + 100, 0);
+      skinGrad.addColorStop(0.0, '#c78a36'); // Chap qirra soyasi
+      skinGrad.addColorStop(0.18, '#f3cb7c'); // Nur tushgan qismi
+      skinGrad.addColorStop(0.38, '#fae6b2'); // Yaltirash markazi
+      skinGrad.addColorStop(0.65, '#f0c470'); // Mayin qovoq rangi
+      skinGrad.addColorStop(0.88, '#d49439'); // O'ng tomon soyasi
+      skinGrad.addColorStop(1.0, '#a86a1e'); // O'ng chetki to'q soya
       sCtx.fillStyle = skinGrad;
       sCtx.fill();
 
-      // Nozik oqish bo'ylama chiziqlar (kadiga xos chiziqlar)
-      sCtx.strokeStyle = 'rgba(254, 243, 199, 0.28)';
-      sCtx.lineWidth = 2.4;
-      const stripeOffsets = [-0.68, -0.42, -0.16, 0.16, 0.42, 0.68];
-      stripeOffsets.forEach(ratio => {
+      // Kadining o'ziga xos bo'ylama mayin qovurg'a chiziqlari (natural ribs)
+      const ribs = [-0.72, -0.48, -0.22, 0.05, 0.32, 0.58, 0.78];
+      ribs.forEach(offset => {
         sCtx.beginPath();
+        sCtx.lineWidth = 3.2;
+        sCtx.strokeStyle = 'rgba(255, 250, 235, 0.26)';
         for (let y = this.topY; y <= this.bottomY; y += 8) {
+          const cx = this.getCenterAtY(y);
           const r = this.getRadiusAtY(y);
-          const x = this.cx + r * ratio;
+          const x = cx + r * offset;
           if (y === this.topY) sCtx.moveTo(x, y);
           else sCtx.lineTo(x, y);
         }
         sCtx.stroke();
       });
 
-      sCtx.restore();
-
-      // 3. Tepadagi yog'ochsimon qovoq dumi (Stem)
-      sCtx.save();
-      sCtx.fillStyle = '#44403c';
-      sCtx.strokeStyle = '#15803d';
-      sCtx.lineWidth = 2;
+      // Yorug'likning vertikal mayin yaltirashi (Specular highlight)
+      const highlight = sCtx.createLinearGradient(this.baseCx - 40, 0, this.baseCx - 10, 0);
+      highlight.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
+      highlight.addColorStop(0.5, 'rgba(255, 253, 245, 0.36)');
+      highlight.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+      sCtx.fillStyle = highlight;
       sCtx.beginPath();
-      sCtx.moveTo(this.cx - 8, this.topY);
-      sCtx.quadraticCurveTo(this.cx - 10, this.topY - 18, this.cx - 5, this.topY - 26);
-      sCtx.lineTo(this.cx + 6, this.topY - 26);
-      sCtx.quadraticCurveTo(this.cx + 9, this.topY - 16, this.cx + 8, this.topY);
+      for (let y = this.topY; y <= this.bottomY; y += 6) {
+        const cx = this.getCenterAtY(y);
+        const r = this.getRadiusAtY(y);
+        const x1 = cx - r * 0.52;
+        const x2 = cx - r * 0.22;
+        if (y === this.topY) sCtx.moveTo(x1, y);
+        else sCtx.lineTo(x1, y);
+      }
+      for (let y = this.bottomY; y >= this.topY; y -= 6) {
+        const cx = this.getCenterAtY(y);
+        const r = this.getRadiusAtY(y);
+        const x2 = cx - r * 0.22;
+        sCtx.lineTo(x2, y);
+      }
       sCtx.closePath();
       sCtx.fill();
-      sCtx.stroke();
+
+      sCtx.restore();
+
+      // ==========================================
+      // 3. DUM QISMI (Haqiqiy yog'ochsimon qovoq dumi)
+      // ==========================================
+      sCtx.save();
+      const topCx = this.getCenterAtY(this.topY);
+
+      // Dumning kadi bilan ulanish yashil-jigarrang asosi
+      sCtx.fillStyle = '#44403c';
+      sCtx.beginPath();
+      sCtx.moveTo(topCx - 12, this.topY + 3);
+      sCtx.lineTo(topCx - 14, this.topY);
+      sCtx.lineTo(topCx - 6, this.topY - 4);
+      sCtx.lineTo(topCx, this.topY - 2);
+      sCtx.lineTo(topCx + 8, this.topY - 4);
+      sCtx.lineTo(topCx + 14, this.topY);
+      sCtx.lineTo(topCx + 12, this.topY + 3);
+      sCtx.closePath();
+      sCtx.fill();
+
+      // Dum tanasi (biroz chapga tabiiy egilgan)
+      const stemGrad = sCtx.createLinearGradient(topCx - 12, 0, topCx + 12, 0);
+      stemGrad.addColorStop(0, '#3f3a32');
+      stemGrad.addColorStop(0.4, '#635b4c');
+      stemGrad.addColorStop(0.7, '#4e5b38'); // Nozik yashillik
+      stemGrad.addColorStop(1, '#2f2b25');
+      sCtx.fillStyle = stemGrad;
+
+      sCtx.beginPath();
+      sCtx.moveTo(topCx - 8, this.topY - 2);
+      sCtx.quadraticCurveTo(topCx - 12, this.topY - 18, topCx - 6, this.topY - 28);
+      sCtx.lineTo(topCx + 5, this.topY - 28);
+      sCtx.quadraticCurveTo(topCx + 9, this.topY - 16, topCx + 8, this.topY - 2);
+      sCtx.closePath();
+      sCtx.fill();
+
+      // Dumning kesilgan ustki qirrasi
+      sCtx.fillStyle = '#78716c';
+      sCtx.beginPath();
+      sCtx.ellipse(topCx - 0.5, this.topY - 28, 5.5, 2.5, 0, 0, Math.PI * 2);
+      sCtx.fill();
+
+      sCtx.restore();
+
+      // ==========================================
+      // 4. TAGIDAGI GULTOJ TUGUNI (Blossom scar)
+      // ==========================================
+      sCtx.save();
+      const bottomCx = this.getCenterAtY(this.bottomY);
+      sCtx.fillStyle = '#78350f';
+      sCtx.beginPath();
+      sCtx.arc(bottomCx, this.bottomY + 1, 3.5, 0, Math.PI * 2);
+      sCtx.fill();
       sCtx.restore();
     }
 
@@ -434,8 +525,9 @@
       this.samplePoints = [];
       const step = 8;
       for (let y = this.topY + 10; y < this.bottomY - 10; y += step) {
+        const cx = this.getCenterAtY(y);
         const r = this.getRadiusAtY(y);
-        for (let x = this.cx - r + 4; x <= this.cx + r - 4; x += step) {
+        for (let x = cx - r + 4; x <= cx + r - 4; x += step) {
           this.samplePoints.push({ x, y });
         }
       }
@@ -525,8 +617,9 @@
 
       for (let i = 0; i < 40; i++) {
         setTimeout(() => {
+          const cx = this.getCenterAtY(this.topY + this.squashHeight * 0.5);
           this.ribbonSystem.emit(
-            this.cx + (Math.random() - 0.5) * 130,
+            cx + (Math.random() - 0.5) * 130,
             this.topY + Math.random() * this.squashHeight,
             (Math.random() - 0.5) * 8,
             -Math.random() * 4
@@ -563,9 +656,10 @@
           return;
         }
 
+        const cx = this.getCenterAtY(currentY);
         const r = this.getRadiusAtY(currentY);
         angle += 0.45;
-        const x = this.cx + Math.sin(angle) * r;
+        const x = cx + Math.sin(angle) * r;
         currentY += 1.8;
 
         this.updateVirtualBlade(x, currentY, angle);

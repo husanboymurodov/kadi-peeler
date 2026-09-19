@@ -1,7 +1,7 @@
 {
   "name": "kadi-peeler",
-  "version": "1.1.0",
-  "description": "KadiArch - Ozg'in kadi (butternut squash) archish uchun innovatsion moslama va interaktiv veb-trenajyor",
+  "version": "1.2.0",
+  "description": "KadiArch - Ozg'in qovoq (kadi) archish uchun qulay moslama va ko'rgazmali dastur",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -9,11 +9,8 @@
   "keywords": [
     "kadi",
     "kadiarch",
-    "butternut-squash",
-    "peeler",
-    "canvas",
-    "gcp",
-    "cloud-run"
+    "qovoq",
+    "archish"
   ],
   "author": "Husan Boymurodov",
   "license": "MIT",
