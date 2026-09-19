@@ -21,7 +21,7 @@ app.use((req, res) => {
 });
 
 const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🥒 KadiPeel 360 Server running at http://0.0.0.0:${PORT}`);
+  console.log(`🥒 KadiArch Server running at http://0.0.0.0:${PORT}`);
 });
 
 process.on('SIGTERM', () => {

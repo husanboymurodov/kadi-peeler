@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>KadiPeel 360 | Фигурали кади арчадиган инновацион мослама</title>
-  <meta name="description" content="Озғин фигурали ошқовоқ (кади / butternut squash) арчиш учун ихтиро қилинган инновацион қурилма ва интерактив веб-тренажёр.">
+  <title>KadiArch | Ozg'in kadi archish moslamasi</title>
+  <meta name="description" content="Ozg'in qovoq (kadi / butternut squash) archish uchun innovatsion moslama va interaktiv veb-trenajyor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -12,11 +12,11 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎃</text></svg>">
 </head>
 <body>
-  <!-- Background subtle warm gradient elements -->
+  <!-- Ambient subtle warm lighting -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
 
-  <!-- Top Navigation Header -->
+  <!-- Header -->
   <header class="header">
     <div class="header-inner">
       <div class="brand">
@@ -27,8 +27,8 @@
           </svg>
         </div>
         <div>
-          <h1 class="brand-title">KadiPeel <span class="accent-text">360</span></h1>
-          <p class="brand-sub" data-i18n="tagline">Озғин фигурали кади (butternut squash) арчиш мосламаси</p>
+          <h1 class="brand-title">Kadi<span class="accent-text">Arch</span></h1>
+          <p class="brand-sub">Ozg'in kadi (butternut squash) archish moslamasi</p>
         </div>
       </div>
 
@@ -51,44 +51,39 @@
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
-          <span data-i18n="blueprintBtn">Мослама чизмаси</span>
-        </button>
-
-        <button id="langToggle" class="btn-outline lang-btn">
-          <span id="langLabel">UZ</span>
+          <span>Moslama chizmasi</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Layout -->
+  <!-- Main Container -->
   <main class="main-container">
-    <!-- Hero / Intro Badge -->
+    <!-- Status / Info Bar -->
     <div class="hero-bar">
       <div class="instruction-pill">
         <span class="pulse-dot"></span>
-        <span id="instructionText" data-i18n="instruction">Бармоғингиз ёки сичқонча билан кади устидан сийпаб арчинг!</span>
+        <span id="instructionText">Barmog'ingiz yoki sichqoncha bilan kadi ustidan surtib arching!</span>
       </div>
       <div class="stats-row">
         <div class="stat-badge">
-          <span class="stat-label" data-i18n="peeledLabel">Арчилди:</span>
+          <span class="stat-label">Archildi:</span>
           <span id="progressText" class="stat-value">0%</span>
         </div>
         <div class="stat-badge">
-          <span class="stat-label" data-i18n="statusLabel">Ҳолат:</span>
-          <span id="statusMessage" class="stat-value-soft" data-i18n="statusReady">Тайёр, бошланг</span>
+          <span class="stat-label">Holat:</span>
+          <span id="statusMessage" class="stat-value-soft">Tayyor, boshlang</span>
         </div>
       </div>
     </div>
 
-    <!-- Interactive Peeling Stage Card -->
+    <!-- Peeling Apparatus Stage Card -->
     <section class="stage-card">
-      <!-- Device Frame Surrounding the Kadi -->
       <div class="device-fixture">
-        <!-- Top Spindle Clamp -->
+        <!-- Top Spindle / Chuck -->
         <div class="fixture-top">
           <div class="spindle-axis"></div>
-          <div class="spindle-chuck" title="Tepadagi dum qisqichi (Top chuck)">
+          <div class="spindle-chuck" title="Tepadagi dum qisqichi">
             <div class="chuck-prong"></div>
           </div>
         </div>
@@ -98,15 +93,14 @@
           <canvas id="peelCanvas"></canvas>
           <canvas id="ribbonCanvas"></canvas>
 
-          <!-- Floating Virtual Blade Tool -->
+          <!-- Floating Virtual Peeler Blade Tool -->
           <div id="virtualBlade" class="virtual-blade">
             <div class="blade-handle"></div>
             <div class="blade-edge"></div>
-            <div class="blade-depth-wheel" title="0.8mm chuqurlik mikroroligi"></div>
-            <div class="blade-sparkle"></div>
+            <div class="blade-guide-roller"></div>
           </div>
 
-          <!-- Peeling Hints overlay (fades on first touch) -->
+          <!-- Peeling Hints overlay -->
           <div id="hintOverlay" class="hint-overlay">
             <div class="hint-hand">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -116,28 +110,28 @@
                 <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
               </svg>
             </div>
-            <p data-i18n="swipeHint">Судраб арчинг (Swipe to peel)</p>
+            <p>Surtib arching</p>
           </div>
         </div>
 
-        <!-- Bottom Turntable Spindle Clamp -->
+        <!-- Bottom Rotary Turntable & Chute -->
         <div class="fixture-bottom">
-          <div class="spindle-base-plate" title="Aylanuvchi taglik qisqichi (Rotary turntable)">
+          <div class="spindle-base-plate" title="Aylanuvchi taglik qisqichi">
             <div class="turntable-gear"></div>
           </div>
-          <div class="waste-chute" title="Lenta shaklidagi po'stloq lotogi (Waste chute)">
-            <span class="chute-label" data-i18n="chuteLabel">Постлоқ лотоги</span>
+          <div class="waste-chute" title="Po'stloq lentasi tushadigan joy">
+            <span class="chute-label">Po'stloq lotogi</span>
           </div>
         </div>
       </div>
 
-      <!-- Controls Panel -->
+      <!-- Controls Panel (Minimal & Clear) -->
       <div class="controls-panel">
         <button id="autoPeelBtn" class="btn-primary">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
-          <span data-i18n="autoPeelBtn">KadiPeel 360 Автo-Арчиш</span>
+          <span>KadiArch Avto-Archish</span>
         </button>
 
         <button id="resetBtn" class="btn-secondary">
@@ -145,73 +139,17 @@
             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
             <path d="M3 3v5h5"></path>
           </svg>
-          <span data-i18n="resetBtn">Янги кади қўйиш</span>
+          <span>Yangi kadi qo'yish</span>
         </button>
-
-        <div class="depth-selector">
-          <span class="selector-label" data-i18n="bladeSizeLabel">Пichoq:</span>
-          <button id="depthThin" class="btn-pill active" title="Faqat yupqa qattiq po'stloqni oladi (0.8mm)">0.8 mm</button>
-          <button id="depthThick" class="btn-pill" title="Kengroq qatlam oladi (1.5mm)">1.5 mm</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Engineering Presentation / Mechanism Breakdown Section -->
-    <section class="device-showcase-section">
-      <div class="section-header">
-        <div class="badge-tag" data-i18n="innovTag">Инновацион Ечим</div>
-        <h2 class="section-title" data-i18n="whyTitle">Нима учун кади (butternut squash)ни оддий пичоқда арчиш қийин?</h2>
-        <p class="section-desc" data-i18n="whyDesc">
-          Кадининг иккита асосий муаммоси бор: <strong>1)</strong> Сирти жуда қаттиқ ва мумсимон (сирғанади); <strong>2)</strong> Шакли гитарасимон (юқориси озғин бўйин, пасти думалоқ қорин). Оддий арчгичлар бурилишда тўхтайди, қўл чарчайди ва шикастланиш хавфи юқори бўлади.
-        </p>
-      </div>
-
-      <!-- Feature Grid: 5 Core Mechanical Inventions -->
-      <div class="features-grid">
-        <article class="feature-card">
-          <div class="feature-icon-box">📐</div>
-          <h3 data-i18n="feat1Title">1. Телескопик 2-ўқли қисқич (Spindle Clamp)</h3>
-          <p data-i18n="feat1Desc">Кадининг узунлигига (20–45 см) мослашувчан вертикал ўқ. Д ум ва пастки марказини маҳкам тутиб, мутлақо барқарор айлантиради.</p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon-box">🎚️</div>
-          <h3 data-i18n="feat2Title">2. Сузувчи контур кузатувчи (Contour Follower)</h3>
-          <p data-i18n="feat2Desc">Пружинали эркин шарнир ёрдамида пичоқ озғин бўйинчадан кенг қорингача бўлган ҳар бир эгриликни 100% аниқ такрорлаб сирпанади.</p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon-box">🎯</div>
-          <h3 data-i18n="feat3Title">3. 0.8 мм Микророликли чекловчи</h3>
-          <p data-i18n="feat3Desc">Пичоқ олдида юрувчи силикон ролик чуқурликни 0.8 мм да қатъий ушлайди. Ширин ва мазали ички қисми мутлақо исроф бўлмайди.</p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon-box">⚙️</div>
-          <h3 data-i18n="feat4Title">4. Сайд-Редуктор ёки Type-C Мотор</h3>
-          <p data-i18n="feat4Desc">Қўлда айлантириш учун 1:4 тезлаштирувчи қулай дастак ёки 15 сонияда бутун кадини спирал қилиб тозалаб берувчи ихчам мотор.</p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-icon-box">🎗️</div>
-          <h3 data-i18n="feat5Title">5. Спирал тасма чиқинди лотоги</h3>
-          <p data-i18n="feat5Desc">Арчилган пўстлоқ атрофга сачрамасдан, яхлит чиройли лента бўлиб пастдаги олинадиган тоза лотокка тушади. Қўллар тоза қолади.</p>
-        </article>
-
-        <article class="feature-card highlight-card">
-          <div class="feature-icon-box">🥟</div>
-          <h3 data-i18n="feat6Title">Ўзбек ошхонаси учун идеал</h3>
-          <p data-i18n="feat6Desc">Кади сомса, кади манти ва ширин қовоқ оши учун ошқовоқ тайёрлаш вақтини 15 дақиқадан 30 сонияга қисқартиради!</p>
-        </article>
       </div>
     </section>
   </main>
 
-  <!-- Blueprint Modal -->
+  <!-- Blueprint Modal (Latin script) -->
   <div id="blueprintModal" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 class="modal-title" data-i18n="modalTitle">KadiPeel 360 Инженерлик Чизмаси</h3>
+        <h3 class="modal-title">KadiArch sxemasi</h3>
         <button id="closeModalBtn" class="btn-close" aria-label="Yopish">&times;</button>
       </div>
       <div class="modal-body">
@@ -229,13 +167,13 @@
             <rect x="140" y="40" width="24" height="400" rx="4" fill="#334155" stroke="#38BDF8" stroke-width="2"/>
             <line x1="152" y1="40" x2="152" y2="440" stroke="#0284C7" stroke-dasharray="4 4"/>
 
-            <!-- Top Telescopic Chuck Arm -->
+            <!-- Top Chuck Arm -->
             <path d="M152 70 L280 70 L280 110" fill="none" stroke="#38BDF8" stroke-width="4"/>
             <rect x="264" y="110" width="32" height="20" rx="3" fill="#64748B" stroke="#94A3B8" stroke-width="2"/>
             <polygon points="274,130 286,130 280,142" fill="#E2E8F0"/>
-            <text x="320" y="105" fill="#38BDF8" font-size="12" font-family="'JetBrains Mono', monospace">1. Telescopic Stem Chuck</text>
+            <text x="320" y="105" fill="#38BDF8" font-size="12" font-family="'JetBrains Mono', monospace">1. Teleskopik dum qisqichi</text>
 
-            <!-- Kadi Outline in Blue -->
+            <!-- Kadi Outline -->
             <path d="M280 142 
                      C265 150, 260 170, 260 200
                      C260 230, 268 250, 265 270
@@ -251,75 +189,74 @@
             <path d="M152 230 L210 230 L240 260" fill="none" stroke="#22C55E" stroke-width="3"/>
             <circle cx="210" cy="230" r="5" fill="#22C55E"/>
             <circle cx="240" cy="260" r="4" fill="#EAB308"/>
-            <!-- Blade Head -->
             <rect x="238" y="252" width="16" height="14" rx="2" fill="#E2E8F0" stroke="#0F172A" stroke-width="1.5"/>
             <line x1="254" y1="254" x2="254" y2="264" stroke="#DC2626" stroke-width="2"/>
-            <text x="40" y="225" fill="#22C55E" font-size="12" font-family="'JetBrains Mono', monospace">2. Floating Contour Arm</text>
-            <text x="40" y="280" fill="#E2E8F0" font-size="12" font-family="'JetBrains Mono', monospace">3. 0.8mm Blade + Roller</text>
+            <text x="40" y="225" fill="#22C55E" font-size="12" font-family="'JetBrains Mono', monospace">2. Suzuvchi kontur richagi</text>
+            <text x="40" y="280" fill="#E2E8F0" font-size="12" font-family="'JetBrains Mono', monospace">3. Maxsus bitta pichoq</text>
 
             <!-- Bottom Turntable -->
             <rect x="250" y="425" width="60" height="18" rx="3" fill="#64748B" stroke="#94A3B8" stroke-width="2"/>
             <ellipse cx="280" cy="443" rx="45" ry="12" fill="#334155" stroke="#38BDF8" stroke-width="2"/>
-            <text x="320" y="445" fill="#38BDF8" font-size="12" font-family="'JetBrains Mono', monospace">4. Rotary Turntable Base</text>
+            <text x="320" y="445" fill="#38BDF8" font-size="12" font-family="'JetBrains Mono', monospace">4. Aylanuvchi taglik</text>
 
-            <!-- Crank Handle -->
+            <!-- Motor / Crank -->
             <path d="M140 370 L100 370 L100 320" fill="none" stroke="#F59E0B" stroke-width="4"/>
             <circle cx="100" cy="320" r="8" fill="#F59E0B"/>
-            <text x="10" y="380" fill="#F59E0B" font-size="12" font-family="'JetBrains Mono', monospace">5. Crank / Motor</text>
+            <text x="10" y="380" fill="#F59E0B" font-size="12" font-family="'JetBrains Mono', monospace">5. Dastak / Motor</text>
           </svg>
         </div>
         <div class="blueprint-legend">
-          <p data-i18n="diagramNote">
-            ⚡ <strong>Ишлаш принципи:</strong> Фойдаланувчи кадини 2 та қисқич ўртасига ўрнатади. Пружинали сузувчи пичоқ бошчаси кадининг бўйнидан бошлаб қовурғасини қаттиқ сиқиб туради. Дастакни айлантирганда ёки моторни ёққанда, кади айланади ва пичоқ автоматик пастга йўналади — бутун пўстлоқ лентадек сидириб олинади.
+          <p>
+            ⚡ <strong>Ishlash prinsipi:</strong> Kadi ikki qisqich orasiga o'rnatiladi. Prujinali suzuvchi pichoq kadi bo'ynidan boshlab qornigacha bo'lgan barcha egri-bugri konturiga moslashib, po'stloqni bitta chiroyli spiral lenta holida sidirib oladi.
           </p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Celebration Modal (Unlocked on 100% Peeling) -->
+  <!-- Celebration Modal (Latin script) -->
   <div id="celebrationModal" class="modal-backdrop hidden">
     <div class="modal-card celebration-card">
       <div class="celebration-hero">
         <span class="celebration-emoji">🎉 🥟 🎃</span>
-        <h3 class="celebration-title" data-i18n="celebTitle">Кади Мукаммал Арчилди!</h3>
-        <p class="celebration-sub" data-i18n="celebSub">Бирорта ҳам тотли лаҳм қисми исроф бўлмади. Энди нима таом тайёрлаймиз?</p>
+        <h3 class="celebration-title">Kadi mukammal archildi!</h3>
+        <p class="celebration-sub">Birorta ham shirin lahm qismi isrof bo'lmadi. Endi qanday taom pishiramiz?</p>
       </div>
 
       <div class="recipe-cards">
         <div class="recipe-item">
           <div class="recipe-icon">🥟</div>
           <div class="recipe-details">
-            <h4 data-i18n="rec1Title">Кади Сомса</h4>
-            <p data-i18n="rec1Desc">Тандирда пишган ширин қовоқ, майда туғралган думба ва зирали хушбўй сомса.</p>
+            <h4>Kadi Somsa</h4>
+            <p>Tandirda pishgan shirin qovoq, mayda to'g'ralgan dumba va zirali xushbo'y somsa.</p>
           </div>
         </div>
 
         <div class="recipe-item">
           <div class="recipe-icon">♨️</div>
           <div class="recipe-details">
-            <h4 data-i18n="rec2Title">Кади Манти</h4>
-            <p data-i18n="rec2Desc">Касконда пишган юпқа хамирли, сершира ва майин қовоқ манти.</p>
+            <h4>Kadi Manti</h4>
+            <p>Qasqonda pishgan yupqa xamirli, sershira va mayin kadi manti.</p>
           </div>
         </div>
 
         <div class="recipe-item">
           <div class="recipe-icon">🍲</div>
           <div class="recipe-details">
-            <h4 data-i18n="rec3Title">Қовоқли Тўй Оши</h4>
-            <p data-i18n="rec3Desc">Думба ёғида қовурилган девзира гуручи ва тилларанг кади бўлаклари.</p>
+            <h4>Qovoqli To'y Oshi</h4>
+            <p>Dumba yog'ida qovurilgan devzira guruchi va tillarang kadi bo'laklari bilan damlangan osh.</p>
           </div>
         </div>
       </div>
 
       <div class="modal-actions">
-        <button id="peelAgainBtn" class="btn-primary" data-i18n="peelAgain">Яна битта кади арчиш</button>
+        <button id="peelAgainBtn" class="btn-primary">Yana bitta kadi archish</button>
       </div>
     </div>
   </div>
 
   <footer class="footer">
-    <p>KadiPeel 360 &copy; 2026. Made with ❤️ by <a href="https://github.com/husanboymurodov" target="_blank" rel="noopener">Husan Boymurodov</a></p>
+    <p>KadiArch &copy; 2026. Made with ❤️ by <a href="https://github.com/husanboymurodov" target="_blank" rel="noopener">Husan Boymurodov</a></p>
   </footer>
 
   <script src="app.js"></script>

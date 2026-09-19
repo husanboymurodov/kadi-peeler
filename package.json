@@ -1,13 +1,14 @@
 {
   "name": "kadi-peeler",
-  "version": "1.0.0",
-  "description": "KadiPeel 360 - Butternut squash (Kadi) interactive peeling simulator and invented device concept",
+  "version": "1.1.0",
+  "description": "KadiArch - Ozg'in kadi (butternut squash) archish uchun innovatsion moslama va interaktiv veb-trenajyor",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "keywords": [
     "kadi",
+    "kadiarch",
     "butternut-squash",
     "peeler",
     "canvas",

@@ -1,62 +1,57 @@
-# 🥒 KadiPeel 360 (КадиАрчар)
+# 🥒 KadiArch
 
-> **Фигурали озғин ошқовоқ (ўзбек тилида: «кади» / butternut squash) арчиш учун ихтиро қилинган инновацион мослама ва интерактив веб-тренажёр.**
-
----
-
-## 📌 1. Муаммо нимада? (Нима учун оддий арчгичлар кадига тўғри келмайди?)
-
-Ўзбек ошхонасида (айниқса сомса, манти ва тўй ошида) энг севиб ишлатиладиган маҳсулот бу — **озғин фигурали кади (butternut squash)** ҳисобланади. Лекин уни арчиш уй бекалари ва ошпазлар учун энг оғир ва хавфли жараён:
-1. **Мумсимон ва тошдек қаттиқ пўстлоқ:** Оддий картошка арчгичлар сирғанади, тиғ тезда ўтмаслашади, пичоқ эса чуқур кетиб ширин гўштини исроф қилади.
-2. **Икки томонлама эгрилик (Гитарасимон/қумсоат шакл):** Юқори қисми ингичка узун бўйин, пастки қисми эса думалоқ қорин. Одатий тўғри пичоқ бурилишларда қўлни кесиш эҳтимолини кескин оширади.
-3. **Оғирлик ва сирпанчиқлик:** 1.5–3 кг келадиган кадини бир қўлда ушлаб, иккинчи қўлда куч билан пичоқ тортиш қўл бўғимларини чарчатади.
+> **Ozg'in figura shaklidagi kadi (butternut squash) archish uchun innovatsion moslama va interaktiv veb-trenajyor.**
 
 ---
-
-## 💡 2. Ихтиро қилинган қурилма: «KadiPeel 360»
-
-Ушбу мослама махсус кади шакли ва пўстлоқ механикасига мослаб ихтиро қилинган:
-
-### ⚙️ Асосий инженерлик тузилиши:
-1. **Телескопик 2-ўқли вертикал қисқич (Dual Spindle Clamp):**
-   - 20 см дан 45 см гача бўлган ҳар қандай кадининг дум қисми ва пастки марказини маҳкам сиқиб туради. Кади бўшлиқда айланиш ўқига эга бўлади.
-2. **Сузувчи контур кузатувчи пичоқ (Adaptive Floating Contour Follower):**
-   - Пичоқ бошчаси эркин пружинали шарнирга ўрнатилган бўлиб, кадининг ингичка бўйнидан бошлаб кенг қорнигача бўлган барча эгри-бугри контурини 100% нусхалайди.
-3. **0.8 мм Микророликли чуқурлик чеклагич (Precision Guide Roller):**
-   - Пичоқ тиғи олдида тиббий силиконли ролик ҳаракатланади. У пичоқнинг фақат 0.8 мм (қаттиқ пўстлоқ) қалинлигида кесишини таъминлайди. Ички ширин лаҳм қисми мутлақо исроф бўлмайди.
-4. **1:4 Сайд-редукторли дастак ёки Type-C Мотор:**
-   - 1 марта дастак буралганда кади 4 марта тез айланади ва пичоқ автоматик равишда юқоридан пастга спирал бўйлаб тушади (ёки қайта қувватланувчи ихчам мотор тугмасини босиш кифоя).
-5. **Спирал тасма чиқинди лотоги (Spiral Waste Chute):**
-   - Арчилган пўстлоқ лента шаклида сидирилиб, пастдаги олинадиган лотокка тушади. Қўллар тоза қолади, атроф булғанмайди.
-
----
-
-## 🎮 3. Интерактив Веб-тренажёр имкониятлари
-
-- 👆 **Сенсор ва сичқонча орқали арчиш:** Бармоқ ёки сичқонча билан кади устидан сийпаб ҳақиқий пўстлоқни шилиб олинг.
-- 🎧 **Web Audio ASMR товуш эффекти:** Ҳар бир тиғ юришида реал пичоқнинг кесиш шитирлаши эшитилади.
-- 🎗️ **Пўстлоқ парчалари физикаси:** Шилиб олинган пўстлоқ ленталари гравитация бўйича пастга тўкилади.
-- 🤖 **Авто-арчиш режими:** «KadiPeel 360 Авто-Арчиш» тугмаси орқали ихтиро қилинган машинанинг ишлашини кўришингиз мумкин.
-- 📐 **Инженерлик чизмаси:** Мослама тузилиши ва чизмасини интерактив кўриш.
-- 🎉 **100% арчилганда байрамона рецептлар:** Кади сомса, кади манти ва тўй оши тайёрлаш таклифлари.
-
----
-
-## 🚀 4. Ишга тушириш ва GCP Cloud Run га юклаш
 
 ### 🌐 Jonli Havola (Live Demo):
-- **Cloud Run URL:** [https://kadi-peeler-745483922277.asia-southeast1.run.app](https://kadi-peeler-745483922277.asia-southeast1.run.app)
-- **GitHub Repository:** [https://github.com/husanboymurodov/kadi-peeler](https://github.com/husanboymurodov/kadi-peeler)
+- **Cloud Run:** [https://kadi-peeler-745483922277.asia-southeast1.run.app](https://kadi-peeler-745483922277.asia-southeast1.run.app)
+- **GitHub Repozitoriy:** [https://github.com/husanboymurodov/kadi-peeler](https://github.com/husanboymurodov/kadi-peeler)
 
-### Маҳаллий ишга тушириш:
+---
+
+## 📌 1. Kadi nima va uni archishdagi asosiy muammo nimada?
+
+O'zbek oshpazligida (ayniqsa tandir somsa, kadi manti va to'y oshida) eng xushko'rilgan sabzavot bu — **ozg'in figura qovoq (kadi)** hisoblanadi. Uni oddiy pichoqda archish qiyin va xavfli:
+1. **Qattiq mumsimon po'stloq:** Oddiy po'stloq archgichlar sirpanadi, pichoq esa ortiqcha botib ketib, ichki shirin lahm go'shtini isrof qiladi.
+2. **Murakkab egri qovurg'a (gitara/qumsoat shakli):** Bo'yni ingichka va uzun, qorni esa keng va dumaloq. Radiusi keskin o'zgargani sababli qo'lni kesish xavfi juda yuqori bo'ladi.
+3. **Qo'l toliqishi:** 1.5–3 kg kadi og'ir bo'lib, uni bir qo'lda ushlab ikkinchi qo'l bilan pichoq tortish bilakni tez charchatadi.
+
+---
+
+## 💡 2. «KadiArch» Moslamasi
+
+KadiArch maxsus kadi shakli va qattiq po'stloq mexanikasiga moslab ixtiro qilingan:
+- **Teleskopik o'q:** Kadining dum va tag qismini o'zaro mahkam qisib erkin aylanma o'q hosil qiladi.
+- **Suzuvchi pichoq richagi:** Kadi bo'ynidan boshlab qornigacha bo'lgan barcha egri-bugri konturini 100% nusxalaydi.
+- **Yagona maxsus pichoq:** Yupqa qattiq po'stloqni optimal qalinlikda tilib, lahm qismini to'liq saqlab qoladi.
+- **Aylanma reduktor yoki Type-C motor:** Kadi spiral bo'yicha tez va oson archiladi.
+- **Chiqindi lotogi:** Po'stloq lenta bo'lib to'g'ridan-to'g'ri maxsus idishga tushadi.
+
+---
+
+## 🎮 3. Interaktiv Trenajyor Imkoniyatlari
+
+- 👆 **Sensor yoki sichqoncha bilan archish:** Telefon ekrani yoki kompyuter sichqonchasi orqali kadi ustidan surtib lahm qismini ochish.
+- 🎧 **Web Audio ASMR tovushi:** Haqiqiy pichoqning po'stloqni kesish mayin shitirlashi.
+- 🎗️ **Lenta zarrachalar fizikasi:** Shilingan po'stloq bo'laklari tortishish kuchi bilan pastga tushadi.
+- 🤖 **KadiArch Avto-Archish:** Mashinaning spiral archish harakatini avtomat tarzda ko'rsatib beradi.
+- 📐 **Moslama chizmasi:** Moslama tuzilishi sxemasi.
+- 🎉 **100% tozalanganda:** Bayramona tabrik va kadi taomlari (Kadi somsa, Kadi manti, To'y oshi).
+
+---
+
+## 🚀 4. Ishga tushirish
+
 ```bash
+# Mahalliy server
 npm install
 npm start
-# Браузерда: http://localhost:8080
+# Brauzerda: http://localhost:8080
 ```
 
-### Google Cloud Run га жойлаш:
 ```bash
+# GCP Cloud Run ga yuklash
 gcloud run deploy kadi-peeler \
   --source . \
   --region asia-southeast1 \
@@ -66,5 +61,5 @@ gcloud run deploy kadi-peeler \
 
 ---
 
-## 👨‍💻 Муаллиф
+## 👨‍💻 Muallif
 **Husan Boymurodov** ([@husanboymurodov](https://github.com/husanboymurodov))

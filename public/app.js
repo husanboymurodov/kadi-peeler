@@ -1,101 +1,12 @@
 /**
- * KadiPeel 360 - Interactive Peeling Simulation & Invented Device Engine
- * Developed for Uzbek "Kadi" (Butternut Squash / Figured Gourd)
- * Author: Husan Boymurodov
+ * KadiArch - Interaktiv Kadi Archish Moslamasi va Veb-Trenajyor
+ * Muallif: Husan Boymurodov
  */
 
 (function () {
   'use strict';
 
-  // --- Localization Dictionary ---
-  const i18n = {
-    uz: {
-      tagline: 'Озғин фигурали кади (butternut squash) арчиш мосламаси',
-      blueprintBtn: 'Мослама чизмаси',
-      instruction: 'Бармоғингиз ёки сичқонча билан кади устидан судраб арчинг!',
-      peeledLabel: 'Арчилди:',
-      statusLabel: 'Ҳолат:',
-      statusReady: 'Тайёр, бошланг',
-      statusPeeling: 'Арчилмоқда...',
-      statusDone: '100% Мукаммал!',
-      swipeHint: 'Судраб арчинг (Swipe to peel)',
-      chuteLabel: 'Пўстлоқ лотоги',
-      autoPeelBtn: 'KadiPeel 360 Автo-Арчиш',
-      resetBtn: 'Янги кади қўйиш',
-      bladeSizeLabel: 'Пичоқ:',
-      innovTag: 'Инновацион Ечим',
-      whyTitle: 'Нима учун кади (butternut squash)ни оддий пичоқда арчиш қийин?',
-      whyDesc: 'Кадининг иккита асосий муаммоси бор: 1) Сирти жуда қаттиқ ва мумсимон (сирғанади); 2) Шакли гитарасимон (юқориси озғин бўйин, пасти думалоқ қорин). Оддий арчгичлар бурилишда тўхтайди, қўл чарчайди ва шикастланиш хавфи юқори бўлади.',
-      feat1Title: '1. Телескопик 2-ўқли қисқич (Spindle Clamp)',
-      feat1Desc: 'Кадининг узунлигига (20–45 см) мослашувчан вертикал ўқ. Дум ва пастки марказини маҳкам тутиб, мутлақо барқарор айлантиради.',
-      feat2Title: '2. Сузувчи контур кузатувчи (Contour Follower)',
-      feat2Desc: 'Пружинали эркин шарнир ёрдамида пичоқ озғин бўйинчадан кенг қорингача бўлган ҳар бир эгриликни 100% аниқ такрорлаб сирпанади.',
-      feat3Title: '3. 0.8 мм Микророликли чекловчи',
-      feat3Desc: 'Пичоқ олдида юрувчи силикон ролик чуқурликни 0.8 мм да қатъий ушлайди. Ширин ва мазали ички қисми мутлақо исроф бўлмайди.',
-      feat4Title: '4. Сайд-Редуктор ёки Type-C Мотор',
-      feat4Desc: 'Қўлда айлантириш учун 1:4 тезлаштирувчи қулай дастак ёки 15 сонияда бутун кадини спирал қилиб тозалаб берувчи ихчам мотор.',
-      feat5Title: '5. Спирал тасма чиқинди лотоги',
-      feat5Desc: 'Арчилган пўстлоқ атрофга сачрамасдан, яхлит чиройли лента бўлиб пастдаги олинадиган тоза лотокка тушади. Қўллар тоза қолади.',
-      feat6Title: 'Ўзбек ошхонаси учун идеал',
-      feat6Desc: 'Кади сомса, кади манти ва ширин қовоқ оши учун ошқовоқ тайёрлаш вақтини 15 дақиқадан 30 сонияга қисқартиради!',
-      modalTitle: 'KadiPeel 360 Инженерлик Чизмаси',
-      diagramNote: '⚡ Ишлаш принципи: Фойдаланувчи кадини 2 та қисқич ўртасига ўрнатади. Пружинали сузувчи пичоқ бошчаси кадининг бўйнидан бошлаб қовурғасини қаттиқ сиқиб туради. Дастакни айлантирганда ёки моторни ёққанда, кади айланади ва пичоқ автоматик пастга йўналади — бутун пўстлоқ лентадек сидириб олинади.',
-      celebTitle: 'Кади Мукаммал Арчилди! 🎉',
-      celebSub: 'Бирорта ҳам тотли лаҳм қисми исроф бўлмади. Энди нима таом тайёрлаймиз?',
-      rec1Title: 'Кади Сомса',
-      rec1Desc: 'Тандирда пишган ширин қовоқ, майда туғралган думба ва зирали хушбўй сомса.',
-      rec2Title: 'Кади Манти',
-      rec2Desc: 'Касконда пишган юпқа хамирли, сершира ва майин қовоқ манти.',
-      rec3Title: 'Қовоқли Тўй Оши',
-      rec3Desc: 'Думба ёғида қовурилган девзира гуручи ва тилларанг кади бўлаклари.',
-      peelAgain: 'Яна битта кади арчиш'
-    },
-    en: {
-      tagline: 'Contour Peeling Mechanism for Butternut Squash (Kadi)',
-      blueprintBtn: 'Device Blueprint',
-      instruction: 'Drag your finger or mouse across the squash to peel!',
-      peeledLabel: 'Peeled:',
-      statusLabel: 'Status:',
-      statusReady: 'Ready, begin',
-      statusPeeling: 'Peeling...',
-      statusDone: '100% Perfect!',
-      swipeHint: 'Swipe to peel',
-      chuteLabel: 'Peel Waste Chute',
-      autoPeelBtn: 'KadiPeel 360 Auto-Peel',
-      resetBtn: 'Load Fresh Kadi',
-      bladeSizeLabel: 'Blade:',
-      innovTag: 'Innovative Design',
-      whyTitle: 'Why is peeling butternut squash (Kadi) so difficult with a standard peeler?',
-      whyDesc: 'Butternut squash has two major hurdles: 1) The rind is dense, waxy and dangerously slippery; 2) The hourglass shape (slender neck transition to bulbous belly). Standard peelers catch on curves, cause hand fatigue, and waste edible sweet flesh.',
-      feat1Title: '1. Telescopic Dual-Axis Spindle Clamp',
-      feat1Desc: 'Telescoping vertical post adjusts to any length (20–45 cm). Clamps the top stem and bottom blossom center for vibration-free rotation.',
-      feat2Title: '2. Floating Contour-Tracking Blade Arm',
-      feat2Desc: 'Spring-loaded dual-pivot follower hugs the exact curvature from narrow neck through waist to bulbous base with zero manual angle adjustments.',
-      feat3Title: '3. 0.8 mm Micro-Depth Guide Roller',
-      feat3Desc: 'Precision micro-roller glides ahead of the ceramic/steel blade, locking peeling depth strictly to 0.8 mm. Zero sweet flesh wasted.',
-      feat4Title: '4. Planetary Crank or Type-C Motor',
-      feat4Desc: 'Smooth 1:4 gear ratio hand crank or whisper-quiet rechargeable USB-C motor peels the entire squash in under 15 seconds.',
-      feat5Title: '5. Continuous Spiral Waste Chute',
-      feat5Desc: 'Peel ribbons peel off in a clean continuous spiral directly down into an easy-empty collection tray. Hands stay 100% clean and safe.',
-      feat6Title: 'Ideal for Uzbek Cuisine',
-      feat6Desc: 'Cuts prep time for Kadi Somsa, Kadi Manti, and Holiday Osh from 15 minutes of strenuous knife work to just 30 seconds!',
-      modalTitle: 'KadiPeel 360 Engineering Schematic',
-      diagramNote: '⚡ Principle: Clamp squash between top chuck and rotary turntable. Floating spring arm presses against neck. Turning the crank or motor rotates the squash while the arm spirals downward, removing peel in a single smooth ribbon.',
-      celebTitle: '100% Perfectly Peeled! 🎉',
-      celebSub: 'Zero sweet flesh was wasted. What traditional dish are we cooking?',
-      rec1Title: 'Kadi Somsa',
-      rec1Desc: 'Crisp tandoor samosas filled with sweet diced pumpkin, tender spices, and savory accents.',
-      rec2Title: 'Kadi Manti',
-      rec2Desc: 'Steamed delicate dumplings bursting with juicy, melt-in-your-mouth spiced squash.',
-      rec3Title: 'Holiday Festive Palov',
-      rec3Desc: 'Golden devzira rice pilaf simmered with tender beef and golden cubes of sweet kadi.',
-      peelAgain: 'Peel Another Kadi'
-    }
-  };
-
-  let currentLang = 'uz';
-
-  // --- Audio Synthesis Engine (Web Audio API) ---
+  // --- Ovoz Sintezi (Web Audio API) ---
   class SoundEngine {
     constructor() {
       this.ctx = null;
@@ -121,11 +32,11 @@
       if (!this.ctx) return;
 
       const now = this.ctx.currentTime;
-      if (now - this.lastPlayTime < 0.05) return; // Throttle sound bursts
+      if (now - this.lastPlayTime < 0.045) return;
       this.lastPlayTime = now;
 
       try {
-        const bufferSize = this.ctx.sampleRate * 0.06; // 60ms sound
+        const bufferSize = Math.floor(this.ctx.sampleRate * 0.055);
         const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
@@ -135,16 +46,14 @@
         const noise = this.ctx.createBufferSource();
         noise.buffer = buffer;
 
-        // Bandpass filter for slicing "shhhk" sound
         const filter = this.ctx.createBiquadFilter();
         filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(2600 + Math.min(speed * 15, 1200), now);
-        filter.Q.setValueAtTime(3.0, now);
+        filter.frequency.setValueAtTime(2800 + Math.min(speed * 12, 1100), now);
+        filter.Q.setValueAtTime(3.2, now);
 
-        // Amplitude envelope
         const gain = this.ctx.createGain();
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
 
         noise.connect(filter);
         filter.connect(gain);
@@ -152,7 +61,7 @@
 
         noise.start(now);
       } catch (err) {
-        // Silently catch audio restrictions
+        // Audio cheklovlari yuzaga kelsa jim o'tkazish
       }
     }
 
@@ -180,7 +89,7 @@
 
   const soundEngine = new SoundEngine();
 
-  // --- Peel Ribbon Particle System ---
+  // --- Po'stloq Lentalari Zarrachalar Tizimi ---
   class RibbonParticleSystem {
     constructor(canvas) {
       this.canvas = canvas;
@@ -189,19 +98,19 @@
     }
 
     emit(x, y, vx, vy) {
-      if (this.particles.length > 60) return;
-      const length = 18 + Math.random() * 22;
+      if (this.particles.length > 75) return;
+      const length = 20 + Math.random() * 24;
       const width = 6 + Math.random() * 5;
       this.particles.push({
         x: x,
         y: y,
-        vx: vx + (Math.random() - 0.5) * 4,
-        vy: vy + Math.random() * 2 + 1.5,
+        vx: vx + (Math.random() - 0.5) * 4.5,
+        vy: vy + Math.random() * 2.5 + 1.8,
         length: length,
         width: width,
         angle: Math.random() * Math.PI * 2,
-        vAngle: (Math.random() - 0.5) * 0.25,
-        curl: Math.random() * 0.4 + 0.2,
+        vAngle: (Math.random() - 0.5) * 0.28,
+        curl: Math.random() * 0.4 + 0.25,
         alpha: 1.0,
         colorOuter: '#f59e0b',
         colorInner: '#ea580c'
@@ -215,10 +124,10 @@
         const p = this.particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.25; // gravity
-        p.vx *= 0.98; // air drag
+        p.vy += 0.28; // Gravitatsiya
+        p.vx *= 0.97; // Havo qarshiligi
         p.angle += p.vAngle;
-        p.alpha -= 0.018;
+        p.alpha -= 0.016;
 
         if (p.alpha <= 0 || p.y > this.canvas.height) {
           this.particles.splice(i, 1);
@@ -230,7 +139,7 @@
         this.ctx.rotate(p.angle);
         this.ctx.globalAlpha = p.alpha;
 
-        // Draw curled ribbon strip
+        // Spiral o'ralgan tasma
         this.ctx.beginPath();
         this.ctx.moveTo(-p.width / 2, 0);
         this.ctx.quadraticCurveTo(0, p.length * p.curl, p.width / 2, p.length);
@@ -239,10 +148,10 @@
         this.ctx.lineCap = 'round';
         this.ctx.stroke();
 
-        // Inner flesh sliver
+        // Ichki qizil-sariq eti
         this.ctx.beginPath();
         this.ctx.moveTo(0, 0);
-        this.ctx.lineTo(0, p.length * 0.8);
+        this.ctx.lineTo(0, p.length * 0.85);
         this.ctx.strokeStyle = p.colorInner;
         this.ctx.lineWidth = p.width * 0.4;
         this.ctx.stroke();
@@ -252,10 +161,10 @@
     }
   }
 
-  // --- Main Interactive Peeling Application ---
-  class KadiSimulator {
+  // --- Asosiy Simulyator ---
+  class KadiArchSimulator {
     constructor() {
-      // DOM Elements
+      // DOM Elementlar
       this.wrapper = document.getElementById('canvasWrapper');
       this.canvas = document.getElementById('peelCanvas');
       this.ctx = this.canvas.getContext('2d');
@@ -267,8 +176,6 @@
       this.statusMessage = document.getElementById('statusMessage');
       this.autoPeelBtn = document.getElementById('autoPeelBtn');
       this.resetBtn = document.getElementById('resetBtn');
-      this.depthThin = document.getElementById('depthThin');
-      this.depthThick = document.getElementById('depthThick');
       this.soundToggle = document.getElementById('soundToggle');
       this.soundOnIcon = document.getElementById('soundOnIcon');
       this.soundOffIcon = document.getElementById('soundOffIcon');
@@ -277,21 +184,18 @@
       this.closeModalBtn = document.getElementById('closeModalBtn');
       this.celebrationModal = document.getElementById('celebrationModal');
       this.peelAgainBtn = document.getElementById('peelAgainBtn');
-      this.langToggle = document.getElementById('langToggle');
-      this.langLabel = document.getElementById('langLabel');
 
-      // State
-      this.peelRadius = 18; // Default thin blade (0.8mm representation)
+      // Doimiy yagona pichoq o'lchami (optimal 22px)
+      this.peelRadius = 22;
       this.isDragging = false;
       this.lastPos = null;
       this.peeledPercentage = 0;
       this.samplePoints = [];
       this.isAutoPeeling = false;
-      this.autoPeelTimer = null;
       this.hasInteracted = false;
       this.completed = false;
 
-      // Offscreen buffers
+      // Offscreen buferlar
       this.fleshCanvas = document.createElement('canvas');
       this.fleshCtx = this.fleshCanvas.getContext('2d');
 
@@ -300,15 +204,27 @@
 
       this.ribbonSystem = new RibbonParticleSystem(this.ribbonCanvas);
 
+      // Kadi kontur nuqtalari (Catmull-Rom spline nazorati)
+      this.controlPoints = [
+        { t: 0.00, r: 24 }, // Dum ulanish qismi
+        { t: 0.05, r: 35 }, // Yuqori bo'yin kengayishi
+        { t: 0.16, r: 36 }, // Mayin va ozg'in bo'yin
+        { t: 0.30, r: 37 }, // Bo'yin o'rtasi
+        { t: 0.42, r: 42 }, // Bel qismi
+        { t: 0.55, r: 56 }, // Qorin boshlanishi
+        { t: 0.72, r: 86 }, // To'liq dumaloq qorin cho'qqisi
+        { t: 0.85, r: 84 }, // Qorin pasti
+        { t: 0.94, r: 62 }, // Tag silliq aylanishi
+        { t: 1.00, r: 14 }  // Tag asosi
+      ];
+
       this.init();
     }
 
     init() {
       this.resize();
       window.addEventListener('resize', () => this.resize());
-
       this.bindEvents();
-      this.updateTranslations();
       this.renderLoop();
     }
 
@@ -346,44 +262,44 @@
     }
 
     setupSquashGeometry() {
-      // Geometry of authentic slender hourglass butternut squash ("Kadi")
       this.cx = this.width / 2;
-      this.topY = 40;
-      this.bottomY = this.height - 40;
+      this.topY = 44;
+      this.bottomY = this.height - 44;
       this.squashHeight = this.bottomY - this.topY;
     }
 
     /**
-     * Radius function defining the butternut squash figure:
-     * - Top stem: slender
-     * - Neck: long, slender cylindrical figure
-     * - Waist: gentle waist indentation
-     * - Bottom belly: wide bulbous pear-shaped round body
+     * Catmull-Rom Spline orqali haqiqiy, silliq va chiroyli kadi konturi
      */
     getRadiusAtY(y) {
       if (y < this.topY || y > this.bottomY) return 0;
-      const t = (y - this.topY) / this.squashHeight; // 0 (top) to 1 (bottom)
+      const t = (y - this.topY) / this.squashHeight; // 0 dan 1 gacha
 
-      if (t < 0.03) {
-        // Stem neck taper
-        return 16 + (t / 0.03) * 12;
-      } else if (t < 0.38) {
-        // Slender neck portion (Ozgin kadi bo'yni)
-        const neckProgress = (t - 0.03) / 0.35;
-        return 28 + Math.sin(neckProgress * Math.PI) * 4;
-      } else if (t < 0.52) {
-        // Waist transition (Bel qismi)
-        const waistProgress = (t - 0.38) / 0.14;
-        return 32 + waistProgress * 14;
-      } else if (t < 0.88) {
-        // Bulbous body (Dumaloq qorin qismi)
-        const bellyProgress = (t - 0.52) / 0.36;
-        return 46 + Math.sin(bellyProgress * Math.PI) * 32;
-      } else {
-        // Bottom base curve (Tag qismi)
-        const baseProgress = (t - 0.88) / 0.12;
-        return 78 * Math.cos(baseProgress * (Math.PI / 2));
+      const pts = this.controlPoints;
+      // Oraliqni aniqlash
+      let i = 0;
+      while (i < pts.length - 2 && pts[i + 1].t < t) {
+        i++;
       }
+
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[Math.min(pts.length - 1, i + 1)];
+      const p3 = pts[Math.min(pts.length - 1, i + 2)];
+
+      const segT = (t - p1.t) / (p2.t - p1.t);
+
+      // Catmull-Rom formulasi
+      const t2 = segT * segT;
+      const t3 = t2 * segT;
+      const v0 = (p2.r - p0.r) * 0.5;
+      const v1 = (p3.r - p1.r) * 0.5;
+
+      const r = (2 * p1.r - 2 * p2.r + v0 + v1) * t3 +
+                (-3 * p1.r + 3 * p2.r - 2 * v0 - v1) * t2 +
+                v0 * segT + p1.r;
+
+      return Math.max(0, r);
     }
 
     isPointInsideSquash(x, y) {
@@ -392,13 +308,10 @@
       return Math.abs(x - this.cx) <= r;
     }
 
-    /**
-     * Draw the organic silhouette path of the kadi
-     */
     drawSquashPath(ctx) {
       ctx.beginPath();
-      const steps = 60;
-      // Right side contour from top to bottom
+      const steps = 70;
+      // O'ng tomon
       for (let i = 0; i <= steps; i++) {
         const y = this.topY + (i / steps) * this.squashHeight;
         const r = this.getRadiusAtY(y);
@@ -406,7 +319,7 @@
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
-      // Left side contour from bottom to top
+      // Chap tomon
       for (let i = steps; i >= 0; i--) {
         const y = this.topY + (i / steps) * this.squashHeight;
         const r = this.getRadiusAtY(y);
@@ -417,7 +330,7 @@
     }
 
     generateSquashLayers() {
-      // 1. Render Flesh Layer (Rich, sweet orange meat)
+      // 1. Lahm (Go'sht) Qatlami - Mazali va sershira to'q sariq
       const fCtx = this.fleshCtx;
       fCtx.clearRect(0, 0, this.width, this.height);
 
@@ -425,48 +338,48 @@
       this.drawSquashPath(fCtx);
       fCtx.clip();
 
-      // Deep orange radial/linear gradient
-      const fleshGrad = fCtx.createLinearGradient(this.cx - 80, this.topY, this.cx + 80, this.bottomY);
-      fleshGrad.addColorStop(0, '#f97316');
-      fleshGrad.addColorStop(0.4, '#fb923c');
+      // Asosiy to'q sariq gradyent
+      const fleshGrad = fCtx.createLinearGradient(this.cx - 90, this.topY, this.cx + 90, this.bottomY);
+      fleshGrad.addColorStop(0, '#ff781f');
+      fleshGrad.addColorStop(0.35, '#fb923c');
       fleshGrad.addColorStop(0.7, '#ea580c');
       fleshGrad.addColorStop(1, '#c2410c');
       fCtx.fillStyle = fleshGrad;
       fCtx.fill();
 
-      // Juicy pulp 3D highlight down the center
-      const highlightGrad = fCtx.createLinearGradient(this.cx - 20, 0, this.cx + 40, 0);
+      // 3D Hajm nuri
+      const highlightGrad = fCtx.createLinearGradient(this.cx - 30, 0, this.cx + 50, 0);
       highlightGrad.addColorStop(0, 'rgba(254, 215, 170, 0.45)');
-      highlightGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.15)');
-      highlightGrad.addColorStop(1, 'rgba(0, 0, 0, 0.25)');
+      highlightGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.2)');
+      highlightGrad.addColorStop(1, 'rgba(0, 0, 0, 0.28)');
       fCtx.fillStyle = highlightGrad;
       fCtx.fill();
 
-      // Fine organic squash fibers texture
-      fCtx.strokeStyle = 'rgba(194, 65, 12, 0.25)';
+      // Lahmdagi tabiiy mayin tolalari
+      fCtx.strokeStyle = 'rgba(194, 65, 12, 0.22)';
       fCtx.lineWidth = 1.2;
-      for (let y = this.topY + 10; y < this.bottomY - 10; y += 6) {
+      for (let y = this.topY + 12; y < this.bottomY - 12; y += 7) {
         const r = this.getRadiusAtY(y);
         fCtx.beginPath();
-        fCtx.moveTo(this.cx - r * 0.8, y);
-        fCtx.quadraticCurveTo(this.cx + (Math.random() - 0.5) * 15, y + 2, this.cx + r * 0.8, y);
+        fCtx.moveTo(this.cx - r * 0.82, y);
+        fCtx.quadraticCurveTo(this.cx + (Math.random() - 0.5) * 16, y + 2, this.cx + r * 0.82, y);
         fCtx.stroke();
       }
 
-      // Seeds cavity shadow in the lower belly
-      const cavityY = this.topY + this.squashHeight * 0.76;
-      const cavityGrad = fCtx.createRadialGradient(this.cx, cavityY, 5, this.cx, cavityY, 40);
+      // Pastki qorindagi urug' uyasi soyasi
+      const cavityY = this.topY + this.squashHeight * 0.74;
+      const cavityGrad = fCtx.createRadialGradient(this.cx, cavityY, 8, this.cx, cavityY, 44);
       cavityGrad.addColorStop(0, 'rgba(254, 240, 138, 0.35)');
-      cavityGrad.addColorStop(0.5, 'rgba(234, 88, 12, 0.15)');
+      cavityGrad.addColorStop(0.6, 'rgba(234, 88, 12, 0.16)');
       cavityGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       fCtx.fillStyle = cavityGrad;
       fCtx.beginPath();
-      fCtx.ellipse(this.cx, cavityY, 32, 42, 0, 0, Math.PI * 2);
+      fCtx.ellipse(this.cx, cavityY, 34, 46, 0, 0, Math.PI * 2);
       fCtx.fill();
 
       fCtx.restore();
 
-      // 2. Render Skin Layer (Waxy pale golden butternut rind)
+      // 2. Po'stloq Qatlami - Chiroyli mumsimon sarg'ish kadi po'sti
       const sCtx = this.skinCtx;
       sCtx.clearRect(0, 0, this.width, this.height);
 
@@ -474,23 +387,23 @@
       this.drawSquashPath(sCtx);
       sCtx.clip();
 
-      // Golden waxy rind gradient
-      const skinGrad = sCtx.createLinearGradient(this.cx - 80, 0, this.cx + 80, 0);
+      // Tabiiy kadi po'stlog'i tuslari
+      const skinGrad = sCtx.createLinearGradient(this.cx - 90, 0, this.cx + 90, 0);
       skinGrad.addColorStop(0, '#d97706');
-      skinGrad.addColorStop(0.2, '#f59e0b');
-      skinGrad.addColorStop(0.45, '#fde68a'); // soft waxy sheen
-      skinGrad.addColorStop(0.75, '#f59e0b');
+      skinGrad.addColorStop(0.22, '#f59e0b');
+      skinGrad.addColorStop(0.48, '#fde68a'); // Quyosh yaltirashi
+      skinGrad.addColorStop(0.8, '#f59e0b');
       skinGrad.addColorStop(1, '#b45309');
       sCtx.fillStyle = skinGrad;
       sCtx.fill();
 
-      // Longitudinal pale subtle stripes characteristic of Kadi
+      // Nozik oqish bo'ylama chiziqlar (kadiga xos chiziqlar)
       sCtx.strokeStyle = 'rgba(254, 243, 199, 0.28)';
-      sCtx.lineWidth = 2.5;
-      const stripeOffsets = [-0.65, -0.4, -0.15, 0.15, 0.4, 0.65];
+      sCtx.lineWidth = 2.4;
+      const stripeOffsets = [-0.68, -0.42, -0.16, 0.16, 0.42, 0.68];
       stripeOffsets.forEach(ratio => {
         sCtx.beginPath();
-        for (let y = this.topY; y <= this.bottomY; y += 10) {
+        for (let y = this.topY; y <= this.bottomY; y += 8) {
           const r = this.getRadiusAtY(y);
           const x = this.cx + r * ratio;
           if (y === this.topY) sCtx.moveTo(x, y);
@@ -499,19 +412,18 @@
         sCtx.stroke();
       });
 
-      // Stem at top
       sCtx.restore();
 
-      // Draw Top Woody Stem (Dumi)
+      // 3. Tepadagi yog'ochsimon qovoq dumi (Stem)
       sCtx.save();
-      sCtx.fillStyle = '#3f3f46';
+      sCtx.fillStyle = '#44403c';
       sCtx.strokeStyle = '#15803d';
       sCtx.lineWidth = 2;
       sCtx.beginPath();
-      sCtx.moveTo(this.cx - 7, this.topY);
-      sCtx.quadraticCurveTo(this.cx - 9, this.topY - 18, this.cx - 4, this.topY - 26);
-      sCtx.lineTo(this.cx + 5, this.topY - 26);
-      sCtx.quadraticCurveTo(this.cx + 8, this.topY - 16, this.cx + 7, this.topY);
+      sCtx.moveTo(this.cx - 8, this.topY);
+      sCtx.quadraticCurveTo(this.cx - 10, this.topY - 18, this.cx - 5, this.topY - 26);
+      sCtx.lineTo(this.cx + 6, this.topY - 26);
+      sCtx.quadraticCurveTo(this.cx + 9, this.topY - 16, this.cx + 8, this.topY);
       sCtx.closePath();
       sCtx.fill();
       sCtx.stroke();
@@ -531,16 +443,12 @@
 
     renderPeelLayer() {
       this.ctx.clearRect(0, 0, this.width, this.height);
-      // Draw underlying flesh
       this.ctx.drawImage(this.fleshCanvas, 0, 0);
-      // Draw peel layer on top
       this.ctx.drawImage(this.skinCanvas, 0, 0);
     }
 
     calculatePeeledPercentage() {
       if (this.samplePoints.length === 0) return 0;
-
-      // Sample pixels on skinCanvas
       const imgData = this.skinCtx.getImageData(0, 0, this.width, this.height).data;
       let peeledCount = 0;
 
@@ -553,8 +461,7 @@
         }
       }
 
-      const percent = Math.min(100, Math.round((peeledCount / this.samplePoints.length) * 100));
-      return percent;
+      return Math.min(100, Math.round((peeledCount / this.samplePoints.length) * 100));
     }
 
     peelAt(x, y, prevX, prevY) {
@@ -564,7 +471,6 @@
       sCtx.save();
       sCtx.globalCompositeOperation = 'destination-out';
 
-      // Draw stroke erasing skin
       sCtx.beginPath();
       if (prevX !== null && prevY !== null) {
         sCtx.moveTo(prevX, prevY);
@@ -578,15 +484,14 @@
       }
       sCtx.restore();
 
-      // Emit peel ribbons
+      // Po'stloq lentalarini chiqarish
       if (this.isPointInsideSquash(x, y)) {
-        const vx = (x - (prevX || x)) * 0.4;
-        const vy = (y - (prevY || y)) * 0.4;
+        const vx = (x - (prevX || x)) * 0.42;
+        const vy = (y - (prevY || y)) * 0.42;
         const speed = Math.sqrt(vx * vx + vy * vy);
         this.ribbonSystem.emit(x, y, vx, vy);
         soundEngine.playPeelSound(speed);
 
-        // Haptic feedback for touch devices
         if (navigator.vibrate && Math.random() < 0.25) {
           navigator.vibrate(12);
         }
@@ -601,13 +506,12 @@
       this.peeledPercentage = percent;
       this.progressText.textContent = `${percent}%`;
 
-      const t = i18n[currentLang];
       if (percent === 0) {
-        this.statusMessage.textContent = t.statusReady;
+        this.statusMessage.textContent = 'Tayyor, boshlang';
       } else if (percent < 95) {
-        this.statusMessage.textContent = t.statusPeeling;
+        this.statusMessage.textContent = 'Archilmoqda...';
       } else {
-        this.statusMessage.textContent = t.statusDone;
+        this.statusMessage.textContent = '100% Mukammal!';
         if (!this.completed) {
           this.triggerCompletion();
         }
@@ -619,16 +523,15 @@
       soundEngine.playVictorySound();
       this.celebrationModal.classList.remove('hidden');
 
-      // Launch victory ribbons
       for (let i = 0; i < 40; i++) {
         setTimeout(() => {
           this.ribbonSystem.emit(
-            this.cx + (Math.random() - 0.5) * 120,
+            this.cx + (Math.random() - 0.5) * 130,
             this.topY + Math.random() * this.squashHeight,
             (Math.random() - 0.5) * 8,
             -Math.random() * 4
           );
-        }, i * 30);
+        }, i * 28);
       }
     }
 
@@ -661,10 +564,9 @@
         }
 
         const r = this.getRadiusAtY(currentY);
-        // Spiral motion around contour
         angle += 0.45;
         const x = this.cx + Math.sin(angle) * r;
-        currentY += 1.8; // Downward feed rate
+        currentY += 1.8;
 
         this.updateVirtualBlade(x, currentY, angle);
         this.peelAt(x, currentY, lastX, lastY);
@@ -685,7 +587,7 @@
       this.completed = false;
       this.peeledPercentage = 0;
       this.progressText.textContent = '0%';
-      this.statusMessage.textContent = i18n[currentLang].statusReady;
+      this.statusMessage.textContent = 'Tayyor, boshlang';
       this.celebrationModal.classList.add('hidden');
       this.virtualBlade.classList.remove('active');
 
@@ -740,43 +642,30 @@
         }
       };
 
-      // Mouse Listeners
+      // Sichqoncha hodisalari
       this.wrapper.addEventListener('mousedown', onStart);
       window.addEventListener('mousemove', onMove);
       window.addEventListener('mouseup', onEnd);
 
-      // Touch Listeners
+      // Sensor (Touch) hodisalari
       this.wrapper.addEventListener('touchstart', onStart, { passive: false });
       window.addEventListener('touchmove', onMove, { passive: false });
       window.addEventListener('touchend', onEnd);
       window.addEventListener('touchcancel', onEnd);
 
-      // Buttons
+      // Tugmalar
       this.autoPeelBtn.addEventListener('click', () => this.startAutoPeel());
       this.resetBtn.addEventListener('click', () => this.resetSquash());
       this.peelAgainBtn.addEventListener('click', () => this.resetSquash());
 
-      // Depth Selectors
-      this.depthThin.addEventListener('click', () => {
-        this.peelRadius = 18;
-        this.depthThin.classList.add('active');
-        this.depthThick.classList.remove('active');
-      });
-
-      this.depthThick.addEventListener('click', () => {
-        this.peelRadius = 28;
-        this.depthThick.classList.add('active');
-        this.depthThin.classList.remove('active');
-      });
-
-      // Sound Toggle
+      // Ovoz tugmasi
       this.soundToggle.addEventListener('click', () => {
         soundEngine.enabled = !soundEngine.enabled;
         this.soundOnIcon.classList.toggle('hidden', !soundEngine.enabled);
         this.soundOffIcon.classList.toggle('hidden', soundEngine.enabled);
       });
 
-      // Blueprint Modal
+      // Chizma modali
       this.blueprintBtn.addEventListener('click', () => {
         this.blueprintModal.classList.remove('hidden');
       });
@@ -788,24 +677,6 @@
           this.blueprintModal.classList.add('hidden');
         }
       });
-
-      // Language Switcher
-      this.langToggle.addEventListener('click', () => {
-        currentLang = currentLang === 'uz' ? 'en' : 'uz';
-        this.langLabel.textContent = currentLang.toUpperCase();
-        this.updateTranslations();
-      });
-    }
-
-    updateTranslations() {
-      const t = i18n[currentLang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) {
-          el.textContent = t[key];
-        }
-      });
-      this.updateProgress();
     }
 
     renderLoop() {
@@ -814,8 +685,8 @@
     }
   }
 
-  // Launch when DOM is ready
+  // Sahifa yuklanganda ishga tushirish
   window.addEventListener('DOMContentLoaded', () => {
-    new KadiSimulator();
+    new KadiArchSimulator();
   });
 })();
